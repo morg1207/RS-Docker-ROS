@@ -3,7 +3,7 @@
 	"dockerComposeFile": [
 		"../docker-compose.yml"
 	],
-	"service": "ros-foxy-turtlebot3",
+	"service": "ros",
 	//"workspaceFolder": "/ros.code-workspace",
 	"workspaceFolder": "/ros2_ws",
 	
