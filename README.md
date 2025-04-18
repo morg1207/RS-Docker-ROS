@@ -1,5 +1,5 @@
 # 🐳 Docker para ROS Humble
-**Rama actual:** `ros-humble` con `gazebo Ignition`.
+**Rama actual:** `ros-humble` con `gazebo Ignition`. 
 
 <img src="./images/ros_humble.png" alt="Ros_humble" width="200"/>
 ---
@@ -91,11 +91,11 @@ code ./
 Para garantizar un flujo de trabajo eficiente con este contenedor, se ha configurado un volumen tipo *bind mount* que sincroniza el espacio de trabajo ROS entre el contenedor y tu sistema host. 
 
 **Estructura clave:**
-- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo Catkin (`/catkin_ws/src`).
+- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo ros2 (`/ros2_ws/src`).
 - **En tu sistema host**: El contenido se sincroniza automáticamente con la carpeta local `./proyecto_ros/`.
 
 
-
+---
 
 ## 🐧 **2. Configuración para Linux**  
 
@@ -188,5 +188,5 @@ docker container rm cont_ros_humble
 Para garantizar un flujo de trabajo eficiente con este contenedor, se ha configurado un volumen tipo *bind mount* que sincroniza el espacio de trabajo ROS entre el contenedor y tu sistema host. 
 
 **Estructura clave:**
-- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo Catkin (`/ros2_ws/src`).
+- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo ros2 (`/ros2_ws/src`).
 - **En tu sistema host**: El contenido se sincroniza automáticamente con la carpeta local `./proyecto_ros/`.
