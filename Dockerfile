@@ -8,7 +8,7 @@ FROM osrf/ros:${ROS_DISTRO}-desktop-full
 WORKDIR /
 
 # Crear espacio de trabajo (nombre genérico)
-RUN mkdir -p /ros_ws/src
+RUN mkdir -p /ros2_ws/src
 
 # Configurar el shell por defecto
 SHELL ["/bin/bash", "-c"]
@@ -30,11 +30,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Posicionar en el workspace
-WORKDIR /ros_ws
+WORKDIR /ros2_ws
 
 # Configuración del entorno ROS (compatible con todas versiones)
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc && \
-    echo "source /ros_ws/install/setup.bash" >> ~/.bashrc && \
+    echo "source /ros2_ws/install/setup.bash" >> ~/.bashrc && \
     echo "export ROS_DISTRO=${ROS_DISTRO}" >> ~/.bashrc
 
 # Copiar script de entrada (debe ser genérico)

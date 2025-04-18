@@ -1,5 +1,5 @@
 # 🐳 Docker para ROS Humble
-**Rama actual:** `ros-humble`  
+**Rama actual:** `ros-humble` con `gazebo Ignition`.
 
 <img src="./images/ros_humble.png" alt="Ros_humble" width="200"/>
 ---
@@ -105,8 +105,26 @@ Para garantizar un flujo de trabajo eficiente con este contenedor, se ha configu
 | Docker Engine | [Descarga](https://docs.docker.com/engine/install/ubuntu/) |
 | Visual Studio Code  | [Descarga](https://code.visualstudio.com/) |
 
+### 🔧 **2.2 Configuración adicional de docker**  
 
-### 📥 **2.2 Clonar Repositorio**  
+Esta es una configuración adicional para docker, solo es necesario hacerla una vez para todas las versiones de ROS.
+1. **Acceso Gráfico para Contenedores**: 
+```bash
+#Para que los contenedores puedan abrir ventanas gráficas en tu sistema (ej.: RViz, Gazebo, GUIs de ROS), ejecuta:
+echo 'xhost +local:docker >/dev/null 2>&1' >> ~/.bashrc && source ~/.bashrc
+```
+2. Ejecutar Docker sin sudo:
+```bash
+# Crear un grupo de docker
+sudo groupadd docker
+# Añadir usuario al grupo de docker
+sudo usermod -aG docker $USER
+# Activar los cambios sin reiniciar sesión
+newgrp docker  
+```
+
+
+### 📥 **2.3 Clonar Repositorio**  
 ```bash
 # Crear carpeta de trabajo
 mkdir -p ~/docker/ros-humble
@@ -114,32 +132,32 @@ mkdir -p ~/docker/ros-humble
 git clone -b ros-humble https://github.com/morg1207/RS-Docker-ROS.git ~/docker/ros-humble
 ```
 
-### 🐋 **2.3 Construcción del Entorno Docker**  
+### 🐋 **2.4 Construcción del Entorno Docker**  
 
 1. 🔨 **Compilar Imagen**  
 ```bash
 #Ir a la carpeta de archivos
 cd ~/docker/ros-humble
 # Construir imagen
-sudo docker compose build 
+docker compose build 
 ```
 
 2. 🚀 **Ejecutar Contenedor**  
 ```bash
 # Eliminar contenedor si ya existe
-sudo docker container rm cont_ros_humble
+docker container rm cont_ros_humble
 # Ejecutar docker compose 
 DISPLAY_VALUE=:0 docker compose up
 ```
 
-### 🤖 **1.4. Ejecutar un terminal dentro del contenedor**  
+### 🤖 **2.5. Ejecutar un terminal dentro del contenedor**  
 
 ```bash
 # Ejecutar un terminal dentro del contenedor
 docker exec -it cont_ros_humble bash
 ```
 
-### 🛠 **2.5 Configuración Avanzada con Dev Containers**   
+### 🛠 **2.6 Configuración Avanzada con Dev Containers**   
 
 **Recomendación profesional:** Para un flujo de trabajo integrado en ROS, utiliza **VS Code con Dev Containers** para:  
 - 🔄 Desarrollo nativo dentro del contenedor  
@@ -151,9 +169,9 @@ docker exec -it cont_ros_humble bash
 1. 🚀 **Elimino el contenedor si ya ha sido creado**  
 ```bash
 # Detengo el contendor si esta en ejecución
-sudo docker container stop cont_ros_humble
+docker container stop cont_ros_humble
 # Eliminar contenedor si ya existe
-sudo docker container rm cont_ros_humble
+docker container rm cont_ros_humble
 ```
 
 2. **Instalar requisitos previos:** 
@@ -165,10 +183,10 @@ sudo docker container rm cont_ros_humble
     Presiona `Ctrl+Shift+P` → **"Dev Container: Reopen in Container"**  
    *VS Code detectará automáticamente la configuración en `.devcontainer/`*
 
-### 🛠 **2.6 Recomendaciones para trabajar con el contenedor ROS humble**   
+### 🛠 **2.7 Recomendaciones para trabajar con el contenedor ROS humble**   
 
 Para garantizar un flujo de trabajo eficiente con este contenedor, se ha configurado un volumen tipo *bind mount* que sincroniza el espacio de trabajo ROS entre el contenedor y tu sistema host. 
 
 **Estructura clave:**
-- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo Catkin (`/catkin_ws/src`).
+- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo Catkin (`/ros2_ws/src`).
 - **En tu sistema host**: El contenido se sincroniza automáticamente con la carpeta local `./proyecto_ros/`.
