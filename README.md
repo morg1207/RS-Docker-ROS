@@ -1,192 +1,192 @@
-# 🐳 Docker para ROS Humble
-**Rama actual:** `ros-humble` con `gazebo Ignition`. 
+# 🚀 Entornos Docker para ROS/ROS2
 
-<img src="./images/ros_humble.png" alt="Ros_humble" width="200"/>
----
+Repositorio con entornos Docker preconfigurados para diferentes versiones de ROS/ROS2.
 
-## 🖥️ **1. Configuración para Windows**  
+## 🌟 Versiones Disponibles
 
-### 📋 **1.1 Requisitos de sotfware**  
-| Software | Enlace |
-|----------|--------|
-| WSL2 | [Instalación](https://aka.ms/wsl2-install) |
-| Docker Desktop | [Descarga](https://docs.docker.com/desktop/setup/install/windows-install/) |
-| Xming Server  | [Descarga](https://sourceforge.net/projects/xming/) |
-| Visual Studio Code  | [Descarga](https://code.visualstudio.com/) |
+| Versión   | Rama          | Estado     | Carpeta       |
+|-----------|---------------|------------|---------------|
+| ROS Noetic| `ros-noetic`  | ✅ Estable | docker/ros-noetic |
+| ROS2 Humble| `ros-humble` | ✅ Estable | docker/ros-humble |
+| ROS2 Iron | `ros-iron`    | ✅ Estable | docker/ros-iron |
+| ROS2 Jazzy| `ros-jazzy`   | ✅ Estable | docker/ros-jazzy |
 
- 1. Se necesita que **Docker** Compose este ejecutándose.
- 2. Se necesita **xlaunch server** este ejecutándose.
+## 🛠️ Configuración
 
-### 📥 **1.2 Clonar Repositorio**  
-```bash
-# Crear carpeta de trabajo
-mkdir -p ~/docker/ros-humble
-# Clonar repositorio
-git clone -b ros-humble https://github.com/morg1207/RS-Docker-ROS.git ~/docker/ros-humble
+
+1. **Configuración general**
+   - [Configuración general](docs/general-setup.md)
+
+2. **Selecciona si estas usando windows o linux**:
+   - [Configuración para Linux](docs/linux-guide.md#gui-config)
+   - [Configuración para Windows](docs/windows-guide.md#gui-config)
+
+## 🚀 Cómo Usar
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/morg1207/RS-Docker-ROS.git
+   ```
+
+2. Elige tu versión:
+   ```bash
+   cd ros-docker/docker/ros-humble  # Por ejemplo, para Humble
+   ```
+
+3. Sigue las instrucciones específicas en el README.md de cada versión.
+
+## 📚 Documentación Detallada
+
+- [Configuración para Windows](docs/windows-guide.md)
+- [Configuración para Linux](docs/linux-guide.md)
+- [Preguntas Frecuentes](docs/faq.md)
+
+## 🤝 Contribuciones
+
+¡Bienvenidas las contribuciones! Por favor sigue nuestra [guía de contribución](CONTRIBUTING.md).
 ```
 
-### 🐋 **1.3 Construcción del Entorno Docker**  
+### 2. README Específico por Versión (ej. docker/ros-humble/README.md)
 
-1. 🔨 **Compilar Imagen**  
-```bash
-#Ir a la carpeta de archivos
-cd ~/docker/ros-humble
-# Construir imagen
-sudo docker compose build 
+```markdown
+# 🐋 ROS2 Humble Docker Environment
+
+**Versión:** Humble Hawksbill  
+**Estado:** ✅ Estable  
+**Docker Tag:** `ros_humble`  
+**Workspace:** `/ros_ws`
+
+## 📦 Características Especiales
+
+- Gazebo Fortress incluido
+- RViz2 preconfigurado
+- Entorno de desarrollo VSCode integrado
+
+## 🚀 Inicio Rápido
+
+1. Construir la imagen:
+   ```bash
+   docker-compose build
+   ```
+
+2. Ejecutar el contenedor:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Acceder al contenedor:
+   ```bash
+   docker exec -it cont_ros_humble bash
+   ```
+
+## 🔧 Configuración Avanzada
+
+Consulta la documentación general para:
+- [Configuración de GUI](docs/linux-guide.md#gui-config)
+- [Uso con VSCode](docs/general-setup.md#vscode-integration)
+
+## ⚠️ Notas Específicas para esta Versión
+
+- Requiere NVIDIA Docker para aceleración GPU
+- Incluye paquetes adicionales: 
+  - `ros-humble-navigation2`
+  - `ros-humble-turtlebot3*`
 ```
 
-2. 🚀 **Ejecutar Contenedor**  
-```bash
-# Detengo el contendor si esta en ejecución
-sudo docker container stop cont_ros_humble
-# Eliminar contenedor si ya existe
-sudo docker container rm cont_ros_humble
-# Ejecutar docker compose 
-sudo docker compose up
+### 3. Documentación Modularizada (en /docs/)
+
+#### general-setup.md
+```markdown
+# Configuración General
+
+## 🔌 Integración con VSCode
+
+1. Instalar la extensión "Remote - Containers"
+2. Abrir el proyecto en VSCode
+3. Presionar Ctrl+Shift+P → "Reopen in Container"
+
+## 🔄 Flujo de Trabajo con Bind Mounts
+
+- Tu código en `./proyecto_ros/` se sincroniza con `/ros_ws/src` en el contenedor
+- Los cambios son inmediatos en ambos lados
 ```
 
+#### windows-guide.md
+```markdown
+# Configuración para Windows
 
-### 🤖 **1.4. Ejecutar un terminal dentro del contenedor**  
+## 📋 Requisitos Específicos
 
-```bash
-# Ejecutar un terminal dentro del contenedor
-docker exec -it cont_ros_humble bash
-```
-### 🛠 **1.5 Configuración Avanzada con Dev Containers**   
+- WSL2 habilitado
+- Xming Server para GUI
+- Docker Desktop con integración WSL2
 
-**Recomendación profesional:** Para un flujo de trabajo integrado en ROS, utiliza **VS Code con Dev Containers** para:  
-- 🔄 Desarrollo nativo dentro del contenedor  
-- 📁 Acceso completo al filesystem  
-- 🐛 Depuración integrada  
--  Extensiones de VS Code integradas y configuradas
+## 🖥️ Configuración X11 {#gui-config}
 
-#### **Pasos para configuración:**  
-
-1. **Instalar requisitos previos:** 
-   - [VS Code](https://code.visualstudio.com/)  
-   - Extensión [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)  
-
-2. 🚀 **Eliminar contenedores remanentes**  
-```bash
-# Detengo el contendor si esta en ejecución
-sudo docker container stop cont_ros_humble
-# Eliminar contenedor si ya existe
-sudo docker container rm cont_ros_humble
+1. Instalar Xming
+2. Ejecutar XLaunch con configuración:
+   - Multiple windows
+   - Display number: 0
+   - Start no client
+3. Exportar variable:
+   ```bash
+   export DISPLAY_VALUE=host.docker.internal:0.0
+   ```
 ```
 
-3. **Abrir el proyecto en un contenedor:**  
-```bash
-# Ir a la carpeta de archivos
-cd ~/docker/ros-conceptos
-# Abro VS Code desde este carpeta
-code ./
-```
-    Presiona `Ctrl+Shift+P` → **"Dev Container: Reopen in Container"**  
-   *VS Code detectará automáticamente la configuración en `.devcontainer/`*
+#### linux-guide.md
+```markdown
+# Configuración para Linux
 
----
+## 📋 Requisitos Específicos
 
-### 🛠 **1.6 Recomendaciones para trabajar con el contenedor ROS humble**   
+- Docker Engine instalado
+- Nvidia Docker Toolkit (para GPU)
 
-Para garantizar un flujo de trabajo eficiente con este contenedor, se ha configurado un volumen tipo *bind mount* que sincroniza el espacio de trabajo ROS entre el contenedor y tu sistema host. 
+## 🖥️ Configuración X11 {#gui-config}
 
-**Estructura clave:**
-- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo ros2 (`/ros2_ws/src`).
-- **En tu sistema host**: El contenido se sincroniza automáticamente con la carpeta local `./proyecto_ros/`.
-
-
----
-
-## 🐧 **2. Configuración para Linux**  
-
-### 📋 **2.1 Requisitos**  
-| Software | Enlace |
-|----------|--------|
-| Docker Engine | [Descarga](https://docs.docker.com/engine/install/ubuntu/) |
-| Visual Studio Code  | [Descarga](https://code.visualstudio.com/) |
-
-### 🔧 **2.2 Configuración adicional de docker**  
-
-Esta es una configuración adicional para docker, solo es necesario hacerla una vez para todas las versiones de ROS.
-1. **Acceso Gráfico para Contenedores**: 
-```bash
-#Para que los contenedores puedan abrir ventanas gráficas en tu sistema (ej.: RViz, Gazebo, GUIs de ROS), ejecuta:
-echo 'xhost +local:docker >/dev/null 2>&1' >> ~/.bashrc && source ~/.bashrc
-```
-2. Ejecutar Docker sin sudo:
-```bash
-# Crear un grupo de docker
-sudo groupadd docker
-# Añadir usuario al grupo de docker
-sudo usermod -aG docker $USER
-# Activar los cambios sin reiniciar sesión
-newgrp docker  
+1. Permitir conexiones X11:
+   ```bash
+   xhost +local:docker
+   ```
+2. Ejecutar con:
+   ```bash
+   export DISPLAY_VALUE=:0
+   docker-compose up
+   ```
 ```
 
+## 💡 Ventajas de Esta Estructura
 
-### 📥 **2.3 Clonar Repositorio**  
-```bash
-# Crear carpeta de trabajo
-mkdir -p ~/docker/ros-humble
-# Clonar repositorio
-git clone -b ros-humble https://github.com/morg1207/RS-Docker-ROS.git ~/docker/ros-humble
-```
+1. **Minimiza duplicación**:
+   - Las instrucciones comunes están centralizadas
+   - Cada versión solo documenta sus particularidades
 
-### 🐋 **2.4 Construcción del Entorno Docker**  
+2. **Mantenimiento más fácil**:
+   - Cambios en configuración general se actualizan en un solo lugar
+   - Las versiones específicas pueden evolucionar independientemente
 
-1. 🔨 **Compilar Imagen**  
-```bash
-#Ir a la carpeta de archivos
-cd ~/docker/ros-humble
-# Construir imagen
-docker compose build 
-```
+3. **Mejor experiencia de usuario**:
+   - Documentación clara y bien organizada
+   - Fácil de encontrar información específica
+   - Se evita la redundancia de información
 
-2. 🚀 **Ejecutar Contenedor**  
-```bash
-# Eliminar contenedor si ya existe
-docker container rm cont_ros_humble
-# Ejecutar docker compose 
-DISPLAY_VALUE=:0 docker compose up
-```
+4. **Escalable**:
+   - Fácil añadir nuevas versiones de ROS
+   - Se pueden añadir nuevos sistemas operativos (Mac) sin afectar estructura
 
-### 🤖 **2.5. Ejecutar un terminal dentro del contenedor**  
+## 🔄 Flujo de Actualización
 
-```bash
-# Ejecutar un terminal dentro del contenedor
-docker exec -it cont_ros_humble bash
-```
+1. Cuando cambie algo en la configuración general:
+   - Actualizar los archivos en `/docs/`
+   
+2. Cuando cambie algo específico de una versión:
+   - Actualizar el README.md en la carpeta correspondiente
 
-### 🛠 **2.6 Configuración Avanzada con Dev Containers**   
+3. Para añadir una nueva versión:
+   - Crear nueva carpeta en `/docker/`
+   - Crear README.md específico
+   - Añadir entrada en la tabla del README principal
 
-**Recomendación profesional:** Para un flujo de trabajo integrado en ROS, utiliza **VS Code con Dev Containers** para:  
-- 🔄 Desarrollo nativo dentro del contenedor  
-- 📁 Acceso completo al filesystem  
-- 🐛 Depuración integrada  
+Esta estructura mantiene tu documentación DRY (Don't Repeat Yourself) mientras provee toda la información necesaria de forma organizada y accesible.
 
-#### **Pasos para configuración:** 
-
-1. 🚀 **Elimino el contenedor si ya ha sido creado**  
-```bash
-# Detengo el contendor si esta en ejecución
-docker container stop cont_ros_humble
-# Eliminar contenedor si ya existe
-docker container rm cont_ros_humble
-```
-
-2. **Instalar requisitos previos:** 
-   - [VS Code](https://code.visualstudio.com/)  
-   - Extensión [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)  
-
-3. **Abrir el proyecto en un contenedor:**  
-
-    Presiona `Ctrl+Shift+P` → **"Dev Container: Reopen in Container"**  
-   *VS Code detectará automáticamente la configuración en `.devcontainer/`*
-
-### 🛠 **2.7 Recomendaciones para trabajar con el contenedor ROS humble**   
-
-Para garantizar un flujo de trabajo eficiente con este contenedor, se ha configurado un volumen tipo *bind mount* que sincroniza el espacio de trabajo ROS entre el contenedor y tu sistema host. 
-
-**Estructura clave:**
-- **Dentro del contenedor**: Todo el desarrollo debe realizarse en el espacio de trabajo ros2 (`/ros2_ws/src`).
-- **En tu sistema host**: El contenido se sincroniza automáticamente con la carpeta local `./proyecto_ros/`.

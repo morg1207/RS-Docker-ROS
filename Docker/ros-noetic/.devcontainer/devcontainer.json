@@ -1,0 +1,28 @@
+{
+	"name": "ROS devcontainer for vscode",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "ros-noetic",
+	//"workspaceFolder": "/ros.code-workspace",
+	"workspaceFolder": "/catkin_ws",
+	
+	"shutdownAction": "stopCompose",
+  // Personalización de VS Code
+  "customizations": {
+    "vscode": {
+			"extensions": [
+				"ms-vscode.cpptools-extension-pack",
+				"ms-iot.vscode-ros",
+				"smilerobotics.urdf",
+				"morningfrog.urdf-visualizer",
+				"ms-vscode.cmake-tools",
+				"ms-toolsai.jupyter-renderers",
+				"ms-iot.vscode-ros"
+				///"github.copilot"
+				
+			]
+		}
+	}
+
+}
