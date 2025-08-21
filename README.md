@@ -1,7 +1,7 @@
 # 🐳 Docker para ROS jazzy
 **Rama actual:** `ros-jazzy` con `gazebo Ignition`. 
 
-<img src="./images/ros_jazzy.png" alt="Ros_jazzy" width="200"/>
+<img src="./images/ros-jazzy.png" alt="Ros_jazzy" width="200"/>
 ---
 
 ## 🖥️ **1. Configuración para Windows**  
