@@ -5,7 +5,7 @@
 	],
 	"service": "ros",
 	//"workspaceFolder": "/ros.code-workspace",
-	"workspaceFolder": "/ros2_ws",
+	"workspaceFolder": "/root/leonardo_ws",
 	
 	"shutdownAction": "stopCompose",
   // Personalización de VS Code

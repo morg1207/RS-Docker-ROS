@@ -19,7 +19,7 @@
 
 ### 📥 **1.2 Clonar Repositorio**  
 ```bash
-# Crear carpeta de trabajo
+# Crear carpeta de trabajoversion: '3.8'
 mkdir -p ~/docker/ros-jazzy
 # Clonar repositorio
 git clone -b ros-jazzy https://github.com/morg1207/RS-Docker-ROS.git ~/docker/ros-jazzy

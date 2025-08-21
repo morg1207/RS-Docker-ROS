@@ -21,4 +21,4 @@ services:
       # Workspace
       - ./.devcontainer/.vscode:/root/leonardo_ws/.vscode:rw
       - ./proyecto_ros:/root/leonardo_ws/src
-    network_mode: "host "
+    network_mode: "host"
