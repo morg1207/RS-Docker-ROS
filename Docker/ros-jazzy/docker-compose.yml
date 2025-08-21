@@ -1,0 +1,24 @@
+services:
+  ros:  # Usa variable de entorno o default a 'humble'
+    image: ros_jazzy  # Nombre de imagen dinámico
+    privileged: true
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - ROS_DISTRO=jazzy  # Pasa la versión al Dockerfile
+      network: host
+    container_name: cont_ros_jazzy  # Nombre dinámico
+    environment:
+      - DISPLAY=:0
+      - QT_X11_NO_MITSHM=1
+      - ROS_DISTRO=jazzy  # Disponible dentro del contenedor
+      - ROS_DOMAIN_ID=4  # Dominio ROS
+    volumes:
+      # Permisos X11
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+      # Workspace
+      - ./.devcontainer/.vscode:/root/leonardo_ws/.vscode:rw
+      - ./proyecto_ros:/root/leonardo_ws/src
+    network_mode: "host "
